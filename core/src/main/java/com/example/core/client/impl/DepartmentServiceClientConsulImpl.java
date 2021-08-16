@@ -9,13 +9,13 @@ import org.springframework.web.client.RestTemplate;
 public class DepartmentServiceClientConsulImpl extends AbstractClient implements DepartmentServiceClient {
 
     public DepartmentServiceClientConsulImpl(final RestTemplate restTemplate) {
-        super(restTemplate, Service.DEPARTMENT);
+        super(Service.DEPARTMENT, restTemplate);
     }
 
     @Override
     public Department getBydId(final long id) {
         return super.call(
-                "/department/" + id,
+                "http://department/api/department/" + id,
                 Department.class
         );
     }

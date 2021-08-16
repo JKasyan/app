@@ -5,20 +5,15 @@ import org.springframework.web.client.RestTemplate;
 
 public abstract class AbstractClient {
 
-    private final RestTemplate restTemplate;
-    private final String url;
-    private final static String URL_TEMPLATE = "https://%s/";
+    protected final Service service;
+    private final RestTemplate rt;
 
-    public AbstractClient(final RestTemplate restTemplate, final Service service) {
-        this.restTemplate = restTemplate;
-        this.url = String.format(URL_TEMPLATE, service);
+    protected AbstractClient(final Service service, final RestTemplate rt) {
+        this.service = service;
+        this.rt = rt;
     }
 
-    protected <T> T call(final String uri, final Class<T> respClass, Object req) {
-        return restTemplate.getForObject(url + uri, respClass, req);
-    }
-
-    protected <T> T call(final String uri, final Class<T> respClass) {
-        return restTemplate.getForObject(url + uri, respClass);
+    protected <T> T call(final String url, final Class<T> respClass) {
+        return rt.getForObject(url, respClass);
     }
 }

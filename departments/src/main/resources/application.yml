@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: department
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        instance-id: ${spring.application.name}:${random.value}
+logging:
+  level:
+    root: debug
+
+server:
+  port: 8600

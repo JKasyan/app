@@ -12,9 +12,9 @@ public class OuterService {
     private final RestTemplate rt;
     private final String url;
 
-    public OuterService(@NonNull final RestTemplate rt, final String url) {
+    public OuterService(@NonNull final RestTemplate rt) {
         this.rt = rt;
-        this.url = url;
+        this.url = "";
     }
 
     public Optional<Integer> getRating(final long userId) {

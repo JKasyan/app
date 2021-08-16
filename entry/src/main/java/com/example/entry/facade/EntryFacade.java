@@ -14,22 +14,22 @@ import com.example.core.model.User;
 import com.example.entry.http.OuterService;
 import com.example.entry.model.RatingAwareUser;
 import com.example.entry.model.TaskDetails;
-import com.example.entry.model.TaskOrder;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
 import java.util.Optional;
 
 @AllArgsConstructor
-@Controller("api/")
-public class TaskFacade {
+@RestController()
+@RequestMapping("api/")
+public class EntryFacade {
 
     private final TaskServiceClient tsc;
     private final DepartmentServiceClient dsc;
@@ -40,12 +40,12 @@ public class TaskFacade {
 
     private static final int DEFAULT_USER_RATING = 0;
 
-    @RequestMapping(value = "/task")
-    public Collection<Task> getTasksBy(@RequestParam final long depId, @RequestParam final TaskOrder orderBy) {
+    @RequestMapping(value = "/task", method = RequestMethod.GET)
+    public Collection<Task> getTasksBy(@RequestParam final long depId) {
         return tsc.getByDepId(depId);
     }
 
-    @RequestMapping(value = "/task/{id}")
+    @RequestMapping(value = "/department/{id}")
     public Department getDep(@PathVariable final long id) {
         return dsc.getBydId(id);
     }
